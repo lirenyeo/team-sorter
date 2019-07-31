@@ -29,6 +29,7 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script src="shuffle-text.min.js"></script>
     <title>Team Sorter</title>
     <style>
       body {
@@ -121,12 +122,20 @@
               <h5 class="team-title card-title mb-4 text-white"><span class="underline" style="border-color: ${colors[index % colors.length]};">Team ${index +
                 1}</span></h5>
               ${members
-                .map(name => `<div class="card-title">${name}</div>`)
+                .map(name => `<div class="names card-title">${name}</div>`)
                 .join('')}
             </div>
           </div>
         `)
       })
+
+      const allNames = document.querySelectorAll(".names");
+      allNames.forEach(n => {
+        const text = new ShuffleText(n)
+        text.setText(n.innerText)
+        text.start()
+      })
+
     </script>
   </body>
 </html>
