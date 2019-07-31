@@ -30,6 +30,8 @@
       crossorigin="anonymous"
     ></script>
     <script src="shuffle-text.min.js"></script>
+    <script src="setting.js"></script>
+
     <title>Team Sorter</title>
     <style>
       body {
@@ -59,7 +61,7 @@
       }
 
       span.underline {
-        border-bottom: solid 3px #de9cff;
+        border-bottom: solid 2px #de9cff;
       }
 
       .text-white {
@@ -68,13 +70,15 @@
     </style>
   </head>
   <body>
-    <h2 id="title" class="text-white text-center">React To Do List Pair Programming</h2>
+    <h2 id="title" class="text-white text-center">
+      React To Do List Pair Programming
+    </h2>
     <div id="container"></div>
     <script>
-      const shuffle = array => array.sort(() => Math.random() - 0.5);
+      const shuffle = array => array.sort(() => Math.random() - 0.5)
 
-      function sort(members, teamSize) {
-        const groups = shuffle(members)
+      const sort = (members, teamSize) =>
+        shuffle(members)
           .map(function(e, i) {
             return i % teamSize === 0 ? members.slice(i, i + teamSize) : null
           })
@@ -82,45 +86,22 @@
             return e
           })
 
-        return groups
-      }
-
-      const colors = [
+      const LINE_COLORS = [
         '#9e95ff',
         '#ff9595',
         '#95e9ff',
         '#95ffa0',
         '#ff95f9',
-        '#fbff95',
+        '#fbff95'
       ]
 
-      const students = [
-        'ruby',
-        'raymond',
-        'shawn',
-        'choorhong',
-        'wernsheng',
-        'amar',
-        'henderson',
-        'gab',
-        'pihan',
-        'suzen',
-        'ling',
-        'weihan',
-        'terrence',
-        'cheehaw',
-        'luke',
-        'sunny',
-        'hang',
-        'azran'
-      ]
-
-      sort(students, 2).forEach((members, index) => {
+      sort(NAME_LIST, TEAM_SIZE).forEach((members, index) => {
         $('#container').append(`
           <div class="text-center card shadow rounded">
             <div class="card-body">
-              <h5 class="team-title card-title mb-4 text-white"><span class="underline" style="border-color: ${colors[index % colors.length]};">Team ${index +
-                1}</span></h5>
+              <h5 class="team-title card-title mb-4 text-white"><span class="underline" style="border-color: ${
+                LINE_COLORS[index % LINE_COLORS.length]
+              };">Team ${index + 1}</span></h5>
               ${members
                 .map(name => `<div class="names card-title">${name}</div>`)
                 .join('')}
@@ -129,13 +110,11 @@
         `)
       })
 
-      const allNames = document.querySelectorAll(".names");
+      const allNames = document.querySelectorAll('.names')
       allNames.forEach(n => {
         const text = new ShuffleText(n)
-        text.setText(n.innerText)
         text.start()
       })
-
     </script>
   </body>
 </html>
