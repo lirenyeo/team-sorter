@@ -67,13 +67,19 @@
       .text-white {
         color: #dcdcdc !important;
       }
+
+      small.challenge {
+        border: solid 1px gray;
+        padding: 1px 3px;
+      }
+
     </style>
   </head>
   <body>
-    <h2 id="title" class="text-white text-center">
-      React To Do List Pair Programming
-    </h2>
+
+    <h2 id="title" class="text-white text-center"></h2>
     <div id="container"></div>
+
     <script>
       const shuffle = array => array.sort(() => Math.random() - 0.5)
 
@@ -95,13 +101,21 @@
         '#fbff95'
       ]
 
+      const CHALLENGES = [1, 2, 4]
+
+      const assignChallenge = () =>
+        CHALLENGES[Math.floor(Math.random() * CHALLENGES.length)]
+
+      $('#title').text(TITLE)
+
       sort(NAME_LIST, TEAM_SIZE).forEach((members, index) => {
         $('#container').append(`
           <div class="text-center card shadow rounded">
             <div class="card-body">
               <h5 class="team-title card-title mb-4 text-white"><span class="underline" style="border-color: ${
                 LINE_COLORS[index % LINE_COLORS.length]
-              };">Team ${index + 1}</span></h5>
+              };">Team ${index +
+          1}</span><small class="ml-2 text-muted challenge">#${assignChallenge()}</small></h5>
               ${members
                 .map(name => `<div class="names card-title">${name}</div>`)
                 .join('')}
